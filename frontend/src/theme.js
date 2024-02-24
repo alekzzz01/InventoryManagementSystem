@@ -17,6 +17,8 @@ export const tokensDark = {
       900: "#141414",
       1000: "#000000", // manually adjusted
     },
+
+    
     primary: {
       // blue
       100: "#d3d4de",
@@ -85,7 +87,7 @@ export const tokensDark = {
                 main: tokensDark.grey[500],
               },
               background: {
-                default: tokensDark.primary[600],
+                default: tokensDark.primary[0],
                 alt: tokensDark.primary[500],
               },
             }
