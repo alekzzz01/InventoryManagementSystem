@@ -24,7 +24,7 @@ function NavbarComponent() {
     <div className="flex items-center">
       <div className="mr-4 flex flex-col">
         <span className="mr-2 text-right">Username</span>
-        <span className="mr-2 text-right">Logon time: {logonTime}</span>
+        <span className="mr-2 text-right text-slate-400">Logon time: {logonTime}</span>
       </div>
       <div>
         <DropdownMenu /> {/* Your dropdown menu component */}
