@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
+import { useNavigate} from 'react-router-dom'; 
+
 function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+
+  const navigate = useNavigate()
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -20,12 +26,22 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post('http://localhost:5000/auth/signup', {username, email, password})
-    .then(response => {
-        console.log(response)
-    }).catch(err => {
-      console.log(err)
-    })
+    const { username, email, password } = e.target.elements;
+
+    Axios.post('http://localhost:5000/auth/signup', { username: username.value, email: email.value, password: password.value })
+      .then(response => {
+        if (response.data.status) {
+          localStorage.setItem('registrationMessage', 'User registered successfully. Please sign in.');
+          navigate('/signin');
+          console.log(response);
+        } else {
+          setMessage('User already exists. Please try again with a different email.');
+        }
+      })
+      .catch(err => {
+        console.log('Error:', err);
+        setMessage('An error occurred. Please try again later.');
+      });
   };
 
   return (
@@ -41,32 +57,34 @@ function Signup() {
           <div>
             <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
             <div className="mt-2">
-              <input
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                required
-                value={username}
-                onChange={handleUsernameChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autoComplete="username"
+              required
+              value={username}
+              onChange={handleUsernameChange}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+
             </div>
           </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
             <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={handleEmailChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={handleEmailChange}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+
             </div>
           </div>
 
@@ -78,16 +96,16 @@ function Signup() {
               </div>
             </div>
             <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                value={password}
-                onChange={handlePasswordChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="newPassword"
+              required
+              value={password}
+              onChange={handlePasswordChange}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
             </div>
           </div>
 
