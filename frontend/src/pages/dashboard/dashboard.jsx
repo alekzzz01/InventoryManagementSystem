@@ -8,7 +8,7 @@ function dashboard() {
     <>
      <Navigationbar/>
     <section className='w-full h-screen grid content-center'>
-                    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-8 lg:px-12 xl:px-96 py-24">
+                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-8 lg:px-12 xl:px-96 py-24">
 
                           
                             <a href='/neworder' className='bg-violet-200 text-black p-4 md:p-6 lg:p-6 text-center rounded'>
