@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { useNavigate} from 'react-router-dom'; 
 
 function Signup() {
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +12,7 @@ function Signup() {
 
 
   const navigate = useNavigate()
+
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -23,6 +25,7 @@ function Signup() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
